@@ -1,6 +1,43 @@
 document.addEventListener('DOMContentLoaded', async () => {
   const container = document.getElementById('tabs-container');
   const resetBtn = document.getElementById('resetAll');
+  const settingsBtn = document.getElementById('toggleSettings');
+  const settingsPanel = document.getElementById('settingsPanel');
+  const themeBtns = document.querySelectorAll('.theme-btn');
+  const body = document.body;
+
+  // --- THEME LOGIC ---
+  // Load theme
+  const { theme } = await chrome.storage.local.get('theme');
+  if (theme) {
+    body.className = theme;
+    updateActiveThemeBtn(theme);
+  }
+
+  // Toggle Settings
+  settingsBtn.addEventListener('click', () => {
+    settingsPanel.classList.toggle('open');
+  });
+
+  // Switch Theme
+  themeBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const newTheme = btn.dataset.theme;
+      body.className = newTheme;
+      chrome.storage.local.set({ theme: newTheme });
+      updateActiveThemeBtn(newTheme);
+    });
+  });
+
+  function updateActiveThemeBtn(activeTheme) {
+    themeBtns.forEach(btn => {
+      if (btn.dataset.theme === activeTheme) {
+        btn.classList.add('active');
+      } else {
+        btn.classList.remove('active');
+      }
+    });
+  }
 
   // --- RESET ALL FUNCTIONALITY ---
   resetBtn.addEventListener('click', async () => {
