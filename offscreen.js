@@ -1,3 +1,5 @@
+console.log("Offscreen script loaded");
+
 const audioStates = {}; // { [tabId]: { context, gain, source, stream } }
 
 chrome.runtime.onMessage.addListener(async (msg) => {

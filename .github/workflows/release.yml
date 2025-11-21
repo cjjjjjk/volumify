@@ -1,0 +1,40 @@
+name: Release Chrome Extension
+
+# Trigger: Chạy khi bạn push một tag bắt đầu bằng 'v' (ví dụ: v1.2, v1.0.1)
+on:
+  push:
+    tags:
+      - 'v*'
+
+permissions:
+  contents: write
+
+jobs:
+  build-and-release:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. Lấy code về
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # 2. Lấy version từ manifest.json để đặt tên file (Optional step nhưng chuyên nghiệp hơn)
+      - name: Get version from manifest
+        id: get_version
+        run: |
+          echo "VERSION=$(jq -r .version manifest.json)" >> $GITHUB_OUTPUT
+
+      # 3. Nén file thành .zip
+      # -x để loại bỏ các file không cần thiết như thư mục git, file cấu hình github
+      - name: Zip extension
+        run: |
+          zip -r extension-v${{ steps.get_version.outputs.VERSION }}.zip . -x "*.git*" "*.github*" "*.DS_Store*"
+
+      # 4. Tạo Release trên GitHub và đính kèm file zip
+      - name: Create Release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: extension-v${{ steps.get_version.outputs.VERSION }}.zip
+          generate_release_notes: true # Tự động tạo ghi chú dựa trên commit
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

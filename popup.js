@@ -98,7 +98,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       <div class="tab-info">
         <img src="${favicon}" class="tab-icon" onerror="this.src='icons/icon16.png'">
         <div class="tab-title" title="${tab.title}">
-          ${tab.id === activeTab?.id ? ': ' : ''}${tab.title}
+          ${tab.title}
         </div>
       </div>
       <div class="volume-row">
@@ -106,8 +106,8 @@ document.addEventListener('DOMContentLoaded', async () => {
         <div class="volume-value">${currentVol}%</div>
       </div>
       <div class="presets">
+        <button class="preset-btn" data-val="0">0%</button>
         <button class="preset-btn" data-val="1">1%</button>
-        <button class="preset-btn" data-val="2">2%</button>
         <button class="preset-btn" data-val="10">10%</button>
         <button class="preset-btn" data-val="50">50%</button>
         <button class="preset-btn" data-val="100">100%</button>
