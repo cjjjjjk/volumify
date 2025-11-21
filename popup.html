@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>Vol Control</title>
+  <style>
+    body {
+      width: 320px;
+      padding: 10px;
+      font-family: 'Courier New', Courier, monospace;
+      background-color: #c0c0c0;
+      /* Win95 Grey */
+      color: #000;
+      border: 2px solid #fff;
+      border-right-color: #808080;
+      border-bottom-color: #808080;
+    }
+
+    /* Retro Header */
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #000080;
+      /* Win95 Title Bar Blue */
+      color: #fff;
+      padding: 4px 8px;
+      margin-bottom: 10px;
+      font-weight: bold;
+      letter-spacing: 1px;
+    }
+
+    .reset-btn {
+      background: #c0c0c0;
+      border: 2px solid #fff;
+      border-right-color: #404040;
+      border-bottom-color: #404040;
+      color: #000;
+      font-family: inherit;
+      font-size: 12px;
+      padding: 2px 6px;
+      cursor: pointer;
+      text-transform: uppercase;
+      font-weight: bold;
+    }
+
+    .reset-btn:active {
+      border: 2px solid #404040;
+      border-right-color: #fff;
+      border-bottom-color: #fff;
+    }
+
+    /* Tab Card */
+    .control-group {
+      margin-bottom: 12px;
+      padding: 8px;
+      background: #fff;
+      border: 2px solid #808080;
+      border-right-color: #fff;
+      border-bottom-color: #fff;
+      box-shadow: inset 1px 1px 0 #000;
+    }
+
+    .tab-info {
+      display: flex;
+      align-items: center;
+      margin-bottom: 8px;
+      border-bottom: 1px dashed #808080;
+      padding-bottom: 4px;
+    }
+
+    .tab-icon {
+      width: 16px;
+      height: 16px;
+      margin-right: 8px;
+      image-rendering: pixelated;
+    }
+
+    .tab-title {
+      font-size: 12px;
+      font-weight: bold;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      flex: 1;
+    }
+
+    .volume-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 6px;
+    }
+
+    /* Retro Slider */
+    input[type=range] {
+      -webkit-appearance: none;
+      flex: 1;
+      height: 20px;
+      background: transparent;
+      margin: 0;
+    }
+
+    input[type=range]::-webkit-slider-runnable-track {
+      width: 100%;
+      height: 4px;
+      background: #000;
+      border-bottom: 1px solid #fff;
+    }
+
+    input[type=range]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      height: 16px;
+      width: 10px;
+      background: #c0c0c0;
+      border: 2px solid #fff;
+      border-right-color: #404040;
+      border-bottom-color: #404040;
+      margin-top: -6px;
+      cursor: pointer;
+    }
+
+    .volume-value {
+      font-family: 'Consolas', monospace;
+      font-weight: bold;
+      color: #000;
+      font-size: 14px;
+      width: 45px;
+      text-align: right;
+      background: #fff;
+      border: 1px inset #808080;
+      padding: 2px;
+    }
+
+    /* Preset Buttons */
+    .presets {
+      display: flex;
+      gap: 4px;
+      justify-content: flex-end;
+    }
+
+    .preset-btn {
+      background: #c0c0c0;
+      border: 1px solid #fff;
+      border-right-color: #404040;
+      border-bottom-color: #404040;
+      font-family: inherit;
+      font-size: 10px;
+      padding: 2px 4px;
+      cursor: pointer;
+      min-width: 24px;
+    }
+
+    .preset-btn:active {
+      border: 1px solid #404040;
+      border-right-color: #fff;
+      border-bottom-color: #fff;
+      transform: translate(1px, 1px);
+    }
+
+    .loading {
+      text-align: center;
+      font-style: italic;
+      padding: 20px;
+    }
+
+    .note {
+      font-size: 10px;
+      color: #404040;
+      margin-top: 10px;
+      text-align: center;
+      border-top: 1px solid #808080;
+      padding-top: 5px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="header">
+    <span>VOL.EXE</span>
+    <button id="resetAll" class="reset-btn" title="Reset all to 100%">RESET</button>
+  </div>
+
+  <div id="tabs-container">
+    <div class="loading">INITIALIZING...</div>
+  </div>
+
+  <div class="note">
+    MAX: 200% | SYSTEM: READY
+  </div>
+  <script src="popup.js"></script>
+</body>
+
+</html>
