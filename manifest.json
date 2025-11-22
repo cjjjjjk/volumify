@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "Volumify",
-  "version": "1.2",
+  "version": "1.4.1",
   "description": "Control volume of individual tabs",
   "permissions": [
     "tabCapture",
